@@ -81,7 +81,6 @@ def main():
     order.add("KEYBOARD", "79.95")
     order.add("MOUSE", "24.95", 2)
     print(json.dumps(CheckoutService().quote(order, coupon="SAVE10"), indent=2))
-    print(test1002)
 
 
 if __name__ == "__main__":
