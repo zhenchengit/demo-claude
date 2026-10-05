@@ -9,17 +9,17 @@ import sqlite3
 def checkout(subtotal, coupon=None):
     discount = 0
 
-    if coupon == "SAVE10" and subtotal > 100:
+    if coupon == "SAVE10" and subtotal >= 100:
         discount = subtotal * 0.10
 
-    tax = subtotal * 0.10
+    tax = (subtotal - discount) * 0.10
     return round(subtotal - discount + tax, 2)
 
 
 def find_order(conn, order_id):
     """Look up an order using an order ID entered by the user."""
-    query = f"SELECT * FROM orders WHERE id = '{order_id}'"
-    return conn.execute(query).fetchone()
+    query = "SELECT * FROM orders WHERE id = ?"
+    return conn.execute(query, (order_id,)).fetchone()
 
 
 if __name__ == "__main__":
